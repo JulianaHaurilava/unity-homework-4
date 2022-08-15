@@ -13,16 +13,22 @@ public class CalculatorScript : MonoBehaviour
 
     public void toAdd()
     {
-        double firstNumber, secondNumber;
-        if (!double.TryParse(firstInputNumber.text, out firstNumber) || !double.TryParse(secondInputNumber.text, out secondNumber))
+        //double firstNumber, secondNumber;
+        bool prov = (firstInputNumber.text == string.Empty || secondInputNumber.text == string.Empty); //правка куратора, но € не совсем понимаю ее. зачем?
+        
+        //if (!double.TryParse(firstInputNumber.text, out firstNumber) || !double.TryParse(secondInputNumber.text, out secondNumber))
+        //{
+        //    errorText.text = "¬веденные значени€ некорректны!";
+        //    return;
+        //}
+        if (!prov) //по факту € ведь делала проверку не нечисловой ввод. а тут проверка испар€етс€ получаетс€...
         {
-            errorText.text = "¬веденные значени€ некорректны!";
-            return;
+            errorText.text = "";
+            double outputNumber = Convert.ToDouble(firstInputNumber) + Convert.ToDouble(secondInputNumber);
+            result.text = outputNumber.ToString("0.#######");
+            signText.text = "+";
         }
-        errorText.text = "";
-        double outputNumber = firstNumber + secondNumber;
-        result.text = outputNumber.ToString("0.#######");
-        signText.text = "+";
+        else errorText.text = "¬веденные значени€ некорректны!";
     }
     public void toSubtract()
     {
